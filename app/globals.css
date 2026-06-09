@@ -189,6 +189,63 @@ p {
   gap: 20px;
 }
 
+.room-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.room-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.room-tab {
+  border: 1px solid transparent;
+  background: #f3f3f3;
+  color: #3a3a3a;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.room-tab.active {
+  background: linear-gradient(120deg, #ffe8df, #ffe0d4);
+  color: #b53c22;
+  border-color: rgba(255, 107, 74, 0.45);
+  box-shadow: 0 6px 14px rgba(255, 107, 74, 0.25);
+  transform: translateY(-1px);
+}
+
+.room-detail {
+  background: var(--bg-secondary);
+  border-radius: 24px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.room-detail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.5), transparent 60%);
+  pointer-events: none;
+}
+
 .room {
   background: var(--bg-secondary);
   border-radius: 24px;
@@ -334,6 +391,7 @@ p {
 .appliance-list {
   display: grid;
   gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .appliance-card {
@@ -425,6 +483,15 @@ p {
 
 .appliance-icon.light .icon-core {
   border-color: #a06a00;
+}
+
+.appliance-icon.generic {
+  background: #edf2f7;
+}
+
+.appliance-icon.generic .icon-core {
+  border-radius: 6px;
+  border-color: #425466;
 }
 
 .appliance-icon.spin {

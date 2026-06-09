@@ -1,4 +1,26 @@
-﻿export type ApplianceType = "fan" | "ac" | "tv" | "light";
+﻿export type ApplianceType =
+  | "fan"
+  | "ac"
+  | "tv"
+  | "light"
+  | "fridge"
+  | "microwave"
+  | "oven"
+  | "kettle"
+  | "toaster"
+  | "dishwasher"
+  | "blender"
+  | "hood"
+  | "speaker"
+  | "console"
+  | "router"
+  | "projector"
+  | "purifier"
+  | "humidifier"
+  | "heater"
+  | "washer"
+  | "dryer"
+  | "charger";
 export type ApplianceState = "ON" | "OFF";
 export type DeviceState = "ON" | "OFF";
 

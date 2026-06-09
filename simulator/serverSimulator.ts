@@ -111,10 +111,15 @@ const broadcast = (state: SimulatorState) => {
   state.listeners.forEach((listener) => listener(snapshot));
 };
 
-const attachClientHandlers = (state: SimulatorState, deviceId: string, client: MqttClient) => {
+const attachClientHandlers = (
+  state: SimulatorState,
+  deviceId: string,
+  topicDeviceId: string,
+  client: MqttClient
+) => {
   client.on("connect", () => {
     state.status = { ...state.status, [deviceId]: "connected" };
-    client.subscribe(`cmnd/${deviceId}/+/state`);
+    client.subscribe(`cmnd/${topicDeviceId}/+/state`);
     broadcast(state);
   });
 
@@ -252,6 +257,7 @@ const startMqttClients = (state: SimulatorState) => {
 
   allDevices.forEach((device) => {
     const { username, password } = getDeviceCredentials(device.envIndex);
+    const topicDeviceId = username ?? device.id;
     if (!fullUrl || !username || !password) {
       state.status = { ...state.status, [device.id]: "idle" };
       state.clients[device.id] = null;
@@ -262,13 +268,15 @@ const startMqttClients = (state: SimulatorState) => {
     const client = mqtt.connect(fullUrl, {
       username,
       password,
+      ca: getEnv("MQTT_CERT") || undefined,
+      cert: getEnv("MQTT_CERT"),
       clientId: `${device.id}-${Math.random().toString(16).slice(2, 10)}`,
       clean: true,
       reconnectPeriod: 2000,
     });
 
     state.clients[device.id] = client;
-    attachClientHandlers(state, device.id, client);
+    attachClientHandlers(state, device.id, topicDeviceId, client);
   });
 };
 
@@ -285,6 +293,7 @@ export const getSimulator = () => {
     getSnapshot: () => ({
       runtime: state.runtime,
       status: state.status,
+      deviceStates: state.deviceStates,
       meta: buildMeta(state),
       updatedAt: Date.now(),
     }),
@@ -293,6 +302,7 @@ export const getSimulator = () => {
       listener({
         runtime: state.runtime,
         status: state.status,
+        deviceStates: state.deviceStates,
         meta: buildMeta(state),
         updatedAt: Date.now(),
       });

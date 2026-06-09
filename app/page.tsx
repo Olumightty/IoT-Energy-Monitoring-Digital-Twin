@@ -35,6 +35,7 @@ export default function Home() {
   );
   const [status, setStatus] = useState<DeviceStatusMap>({});
   const [meta, setMeta] = useState<SimulatorMeta>(defaultMeta);
+  const [activeRoom, setActiveRoom] = useState(rooms[0]?.name ?? "");
 
   useEffect(() => {
     const source = new EventSource("/api/stream");
@@ -160,6 +161,8 @@ export default function Home() {
           status={status}
           deviceStates={deviceStates ?? {}}
           deviceIdByLabel={meta.deviceIdByLabel ?? {}}
+          activeRoom={activeRoom}
+          onSelectRoom={setActiveRoom}
           onToggleDevice={handleToggleDevice}
           onToggleAppliance={handleToggleAppliance}
         />

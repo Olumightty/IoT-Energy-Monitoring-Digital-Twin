@@ -29,6 +29,8 @@ export const createDeviceClient = (
     username: config.username,
     password: config.password,
     clientId: `${config.deviceId}-${Math.random().toString(16).slice(2, 10)}`,
+    ca: process.env.MQTT_CERT || undefined,
+    cert: process.env.MQTT_CERT || undefined,
     clean: true,
     reconnectPeriod: 2000,
   });
