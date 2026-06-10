@@ -6,7 +6,7 @@ import { ApplianceState, DeviceState } from "../types/simulator";
 import { randomInRange } from "../utils/random";
 import mqtt, { MqttClient } from "mqtt";
 
-const TELEMETRY_INTERVAL_MS = 10000;
+const TELEMETRY_INTERVAL_MS = 30000;
 
 type Listener = (snapshot: SimulatorSnapshot) => void;
 

@@ -49,10 +49,10 @@ export const generateTelemetry = (
 
   if (state === "ON" && Math.random() < anomalyProbability) {
     const metric = pickOne(["voltage", "current", "power", "temperature"]);
-    const multiplier = spikeMultiplier(metric);
+    const multiplier = spikeMultiplier(metric as keyof TelemetryData);
     telemetry = {
       ...telemetry,
-      [metric]: Number((telemetry[metric] * multiplier).toFixed(2)),
+      [metric]: Number((telemetry[metric as keyof TelemetryData] * multiplier).toFixed(2)),
     };
   }
 
