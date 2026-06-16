@@ -52,8 +52,8 @@ export const StatusPanel = ({
       </div>
       <div className="panel-block">
         <h3>Telemetry cadence</h3>
-        <p className="panel-subtext">Publishing every 10 seconds per appliance.</p>
-        <div className="cadence-pill">10s interval</div>
+        <p className="panel-subtext">Publishing every 30 seconds per appliance.</p>
+        <div className="cadence-pill">30s interval</div>
       </div>
     </aside>
   );

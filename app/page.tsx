@@ -128,7 +128,7 @@ export default function Home() {
           <h1>Live Appliance Telemetry, Command Control, and Device Fleet Health</h1>
           <p className="hero-subtitle">
             Each room contains a dedicated IoT device that publishes telemetry every
-            10 seconds and reacts instantly to MQTT control commands.
+            30 seconds and reacts instantly to MQTT control commands.
           </p>
         </div>
         <div className="hero-stats">
